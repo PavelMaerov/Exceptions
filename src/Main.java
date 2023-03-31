@@ -18,14 +18,14 @@ public class Main {
             throw new WrongPasswordException("Ошибка! Пароль и подтверждение пароля не равны");
         }
         if (password.length() > 19) {
-            return false;
+            throw new WrongPasswordException("Ошибка! Длина пароля > 19");
         }
         // только латинские буквы, цифры и знак подчеркивания
         if (existWrongSymbols(login)) {
-            return false;
+            throw new WrongLoginException("Ошибка! В логине есть недопустимые символы");
         }
         if (existWrongSymbols(password)) {
-            return false;
+            throw new WrongPasswordException("Ошибка! В пароле есть недопустимые символы");
         }
         return true;
     }
@@ -41,7 +41,7 @@ public class Main {
 
     //испытания
     public static void main(String[] args) {
-        String login = "123456789012345678901";
+        String login = "1234567890123456789.";
         String password = "A1234567890_123456z";
         String confirmPassword = "A1234567890_123456z";
         boolean result = checkWhichHandlesExceptions(login, password, confirmPassword);
